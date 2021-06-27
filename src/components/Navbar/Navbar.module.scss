@@ -1,0 +1,24 @@
+@import "../../sass/abstracts/vars";
+@import "../../sass/abstracts/mixins";
+
+.navigation{
+  background-color: $primaryColorBg;
+  opacity: 0.9;
+  height: 100vh;
+  border-right: 2px solid #3A444C;
+  .menu{
+    padding-top: 100px;
+    @include flex();
+    flex-direction: column;
+    .menu_item:last-child{
+      margin-bottom: 0;
+    }
+    .menu_item{
+      margin-bottom: 45px;
+      .menu_link{
+        color: #ffff;
+        font-size: 18px;
+      }
+    }
+  }
+}
