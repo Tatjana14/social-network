@@ -19,6 +19,9 @@
         color: #ffff;
         font-size: 18px;
       }
+      .menu_link_active{
+        color: $colorActive;
+      }
     }
   }
 }
