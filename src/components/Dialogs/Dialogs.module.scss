@@ -1,8 +1,15 @@
 @import "../../sass/abstracts/vars";
+@import "../../sass/abstracts/mixins";
 
 
-.container{
+.dialogs{
   background-color: $primaryColorBg;
   opacity: 0.9;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-auto-columns: auto;
+  .dialogs_items{
+    border-right: 2px solid #3A444C;
+  }
 }
 
