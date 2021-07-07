@@ -1,4 +1,38 @@
 
+
+export type PostsDataType ={
+    id: number
+    message: string
+    likesCount: string
+}
+export type DialogsDataType = {
+    id: number
+    name: string
+}
+export type MessagesDataType = {
+    id: number
+    message: string
+}
+type ProfilePageType = {
+    postsData: Array<PostsDataType>
+}
+type MessagesPageType = {
+    dialogsData: Array<DialogsDataType>
+    messagesData: Array<MessagesDataType>
+}
+
+type StateType = {
+    profilePage: ProfilePageType
+    messagesPage: MessagesPageType
+}
+type AppType ={
+    state: StateType
+}
+
+
+
+
+
 let state = {
     profilePage: {
         postsData: [

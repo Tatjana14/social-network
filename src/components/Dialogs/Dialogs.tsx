@@ -3,15 +3,9 @@ import React from 'react';
 import s from './Dialogs.module.scss'
 import MessItem from './MessageItem/MessItem';
 import DialogItem from "./DialogItem/DialogItem";
+import {DialogsDataType, MessagesDataType} from "../../redux/state";
 
-export type DialogsDataType = {
-    id: number
-    name: string
-}
-export type MessagesDataType = {
-    id: number
-    message: string
-}
+
 
 type DialogsType = {
     dialogsData: Array<DialogsDataType>
