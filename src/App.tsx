@@ -7,21 +7,31 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Dialogs, {DialogsDataType, MessagesDataType} from './components/Dialogs/Dialogs';
 import {PostsDataType} from "./components/Profile/MyPosts/MyPosts";
 
-type AppType ={
+type ProfilePageType = {
     postsData: Array<PostsDataType>
+}
+type MessagesPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
 }
-const App = (props: AppType) => {
+
+type StateType = {
+    profilePage: ProfilePageType
+    messagesPage: MessagesPageType
+}
+type AppType ={
+    state: StateType
+}
+const App: React.FC<AppType> = (props) => {
 
   return (
       <BrowserRouter>
           <div className="app">
               <Header />
               <Navbar />
-              <Route path='/profile' render={() => <Profile  postsData={props.postsData}/>} />
-              <Route path='/dialogs'  render={() => <Dialogs dialogsData={props.dialogsData}
-                                                             messagesData={props.messagesData}/>}/>
+              <Route path='/profile' render={() => <Profile  postsData={props.state.profilePage.postsData}/>} />
+              <Route path='/dialogs'  render={() => <Dialogs dialogsData={props.state.messagesPage.dialogsData}
+                                                             messagesData={props.state.messagesPage.messagesData}/>}/>
           </div>
       </BrowserRouter>
 

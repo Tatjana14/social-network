@@ -6,7 +6,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 type ProfileType = {
     postsData: Array<PostsDataType>
 }
-const Profile = (props: ProfileType) => {
+const Profile: React.FC<ProfileType> = (props) => {
 
     return (
         <div className={s.container}>

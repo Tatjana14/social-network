@@ -10,7 +10,7 @@ export type PostsDataType ={
 type MyPostsType = {
     postsData: Array<PostsDataType>
 }
-const MyPosts = (props: MyPostsType) => {
+const MyPosts: React.FC<MyPostsType> = (props) => {
     let postsElements = props.postsData.map( p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
     return (
         <div>
