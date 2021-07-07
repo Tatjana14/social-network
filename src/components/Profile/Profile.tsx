@@ -1,14 +1,17 @@
 import s from "./Profile.module.scss";
 import React from "react";
-import MyPosts from "./MyPosts/MyPosts";
+import MyPosts, {PostsDataType} from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
+type ProfileType = {
+    postsData: Array<PostsDataType>
+}
+const Profile = (props: ProfileType) => {
 
-const Profile = () => {
     return (
         <div className={s.container}>
             <ProfileInfo />
-            <MyPosts />
+            <MyPosts postsData={props.postsData}/>
         </div>
     );
 }
