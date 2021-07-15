@@ -9,13 +9,20 @@ type MyPostsType = {
 }
 const MyPosts: React.FC<MyPostsType> = (props) => {
     let postsElements = props.postsData.map( p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
+
+    let addPost = () => {
+        let text = newPostElement.current?.value
+        alert(text);
+    }
     return (
         <div>
             <h2>My posts</h2>
             <div>
-                <textarea></textarea>
+                <textarea ref={newPostElement} ></textarea>
             </div>
-            <button>add post</button>
+            <button onClick={addPost}>add post</button>
             <div className={s.posts}>
                 {postsElements}
             </div>
