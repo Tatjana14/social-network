@@ -56,4 +56,13 @@ let state = {
     }
 
 }
+
+export let addPost = (postMessage: string) => {
+    let newPost: PostsDataType = {
+        id: 3,
+        message: postMessage,
+        likesCount: '0'
+    }
+    state.profilePage.postsData.push(newPost)
+}
 export default state;
