@@ -1,3 +1,4 @@
+import {rerenderEntireTree} from "../render";
 
 
 export type PostsDataType ={
@@ -21,11 +22,11 @@ type MessagesPageType = {
     messagesData: Array<MessagesDataType>
 }
 
-type StateType = {
+export type StateType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
 }
-type AppType ={
+export type AllStateType ={
     state: StateType
 }
 
@@ -64,5 +65,6 @@ export let addPost = (postMessage: string) => {
         likesCount: '0'
     }
     state.profilePage.postsData.push(newPost)
+    rerenderEntireTree(state)
 }
 export default state;
