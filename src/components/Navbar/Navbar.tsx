@@ -21,7 +21,12 @@ const Navbar = () => {
                 <li className={s.menu_item}>
                     <NavLink to="#" className={s.menu_link} >Settings</NavLink>
                 </li>
-
+                <li className={s.menu_item}>
+                    <NavLink to="#" className={s.menu_link} >Music</NavLink>
+                </li>
+                <li className={s.menu_item}>
+                    <NavLink to="#" className={s.menu_link} >Settings</NavLink>
+                </li>
             </ul>
         </nav>
     );
