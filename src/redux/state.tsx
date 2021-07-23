@@ -16,6 +16,7 @@ export type MessagesDataType = {
 }
 type ProfilePageType = {
     postsData: Array<PostsDataType>
+    newPostText: string
 }
 type MessagesPageType = {
     dialogsData: Array<DialogsDataType>
@@ -39,7 +40,8 @@ let state = {
         postsData: [
             { id: 1, message: "Hi, how are you?", likesCount: '0'},
             { id: 2, message: "It's my first post",  likesCount: '23'},
-        ]
+        ],
+        newPostText: 'hey',
     },
     messagesPage: {
         dialogsData: [

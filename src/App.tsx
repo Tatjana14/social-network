@@ -17,7 +17,7 @@ const App = (props: AllStateType) => {
               <Header />
               <Navbar />
               <Route exact path='/'
-                     render={() => <Profile addPost={addPost} postsData={props.state.profilePage.postsData}/>} />
+                     render={() => <Profile addPost={addPost} newPostText={props.state.profilePage.newPostText} postsData={props.state.profilePage.postsData}/>} />
               <Route path='/dialogs'
                      render={() => <Dialogs
                      dialogsData={props.state.messagesPage.dialogsData}
