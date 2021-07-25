@@ -7,19 +7,13 @@ const Navbar = () => {
         <nav className={s.navigation}>
             <ul className={s.menu}>
                 <li className={s.menu_item}>
-                    <NavLink to="/" className={s.menu_link} activeClassName={s.menu_link_active}>Profile</NavLink>
+                    <NavLink to="/" className={s.menu_link}>Profile</NavLink>
                 </li>
                 <li className={s.menu_item}>
-                    <NavLink to="/dialogs" className={s.menu_link} activeClassName={s.menu_link_active}>Messages</NavLink>
+                    <NavLink to="/dialogs" className={s.menu_link}>Messages</NavLink>
                 </li>
                 <li className={s.menu_item}>
                     <NavLink to="#" className={s.menu_link} >News</NavLink>
-                </li>
-                <li className={s.menu_item}>
-                    <NavLink to="#" className={s.menu_link} >Music</NavLink>
-                </li>
-                <li className={s.menu_item}>
-                    <NavLink to="#" className={s.menu_link} >Settings</NavLink>
                 </li>
                 <li className={s.menu_item}>
                     <NavLink to="#" className={s.menu_link} >Music</NavLink>

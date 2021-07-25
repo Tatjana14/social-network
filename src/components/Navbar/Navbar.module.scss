@@ -20,7 +20,7 @@
         color: #ffff;
         font-size: 18px;
       }
-      .menu_link_active{
+      .menu_link:focus{
         color: $colorActive;
       }
     }
