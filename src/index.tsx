@@ -7,7 +7,7 @@ import App from "./App";
 
 
 
-let rerenderEntireTree = (state: StateType) =>{
+let rerenderEntireTree = () =>{
     ReactDOM.render(
         <React.StrictMode>
             <App state={state}/>
@@ -15,6 +15,6 @@ let rerenderEntireTree = (state: StateType) =>{
         document.getElementById('root')
     );
 }
-rerenderEntireTree(state)
+rerenderEntireTree()
 subscriber(rerenderEntireTree)
 reportWebVitals();
