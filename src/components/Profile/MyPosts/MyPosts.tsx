@@ -1,5 +1,5 @@
 import s from "./MyPosts.module.scss";
-import React from "react";
+import React, {ChangeEvent} from "react";
 import Post from "./Post/Post";
 import { PostsDataType } from "../../../redux/state";
 
@@ -20,11 +20,8 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
             props.addPost()
         }
     }
-    let updatePost = () =>{
-        if (newPostElement.current){
-            props.updatePost(newPostElement.current.value)
-        }
-
+    let updatePost = (e: ChangeEvent<HTMLTextAreaElement>) =>{
+        props.updatePost(e.currentTarget.value)
     }
     return (
         <div>
