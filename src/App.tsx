@@ -5,11 +5,15 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from 'react-router-dom';
 import Dialogs from './components/Dialogs/Dialogs';
-import {addPost, AllStateType, updatePost} from "./redux/state";
+import { StateType} from "./redux/state";
 
+type PropsType = {
+    state: StateType
+    addPost: () => void
+    updateNewPostText:  (newPostText: string) => void
+}
 
-
-const App = (props: AllStateType) => {
+const App = (props: PropsType) => {
 
   return (
       <BrowserRouter>
@@ -18,10 +22,10 @@ const App = (props: AllStateType) => {
               <Navbar />
               <Route exact path='/'
                      render={() => <Profile
-                         addPost={addPost}
+                         addPost={props.addPost}
                          newPostText={props.state.profilePage.newPostText}
                          postsData={props.state.profilePage.postsData}
-                         updatePost={updatePost}
+                         updatePost={props.updateNewPostText}
                      />} />
               <Route path='/dialogs'
                      render={() => <Dialogs
