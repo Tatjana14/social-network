@@ -2,13 +2,12 @@ import s from "./Profile.module.scss";
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PostsDataType} from "../../redux/state";
+import {AddPostActionType, PostsDataType, UpdateTextActionType} from "../../redux/state";
 
 type ProfileType = {
     postsData: Array<PostsDataType>
-    addPost: () => void
+    dispatch: (action: AddPostActionType | UpdateTextActionType) => void
     newPostText: string
-    updatePost: (newPostText: string) => void
 }
 const Profile: React.FC<ProfileType> = (props) => {
 
@@ -16,10 +15,9 @@ const Profile: React.FC<ProfileType> = (props) => {
         <div className={s.container}>
             <ProfileInfo />
             <MyPosts
-                addPost={props.addPost}
+                dispatch={props.dispatch}
                 postsData={props.postsData}
                 newPostText={props.newPostText}
-                updatePost={props.updatePost}
             />
         </div>
     );

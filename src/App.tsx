@@ -5,12 +5,11 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from 'react-router-dom';
 import Dialogs from './components/Dialogs/Dialogs';
-import { StateType} from "./redux/state";
+import {AddPostActionType, StateType, UpdateTextActionType} from "./redux/state";
 
 type PropsType = {
     state: StateType
-    addPost: () => void
-    updateNewPostText:  (newPostText: string) => void
+    dispatch: (action: AddPostActionType | UpdateTextActionType) => void
 }
 
 const App = (props: PropsType) => {
@@ -22,10 +21,9 @@ const App = (props: PropsType) => {
               <Navbar />
               <Route exact path='/'
                      render={() => <Profile
-                         addPost={props.addPost}
+                         dispatch={props.dispatch}
                          newPostText={props.state.profilePage.newPostText}
                          postsData={props.state.profilePage.postsData}
-                         updatePost={props.updateNewPostText}
                      />} />
               <Route path='/dialogs'
                      render={() => <Dialogs
