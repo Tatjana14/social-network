@@ -28,7 +28,10 @@ const App = (props: PropsType) => {
               <Route path='/dialogs'
                      render={() => <Dialogs
                      dialogsData={props.state.messagesPage.dialogsData}
-                     messagesData={props.state.messagesPage.messagesData}/>}/>
+                     messagesData={props.state.messagesPage.messagesData}
+                     newMessageText={props.state.messagesPage.newMessageText}
+                     dispatch={props.dispatch}
+                     />}/>
           </div>
       </BrowserRouter>
 

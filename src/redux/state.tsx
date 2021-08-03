@@ -5,7 +5,10 @@ let rerenderEntireTree = () => {
 */
 
 
-
+export type MessageType = {
+    id: number
+    message: string
+}
 export type PostsDataType ={
     id: number
     message: string
@@ -26,6 +29,7 @@ type ProfilePageType = {
 type MessagesPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
+    newMessageText: string
 }
 
 export type StateType = {
@@ -37,9 +41,11 @@ export type AllStateType ={
 }
 export type AddPostActionType = ReturnType<typeof addPostAC>
 export type UpdateTextActionType = ReturnType<typeof changeNewPostTextAC>
+export type AddMessageActionType = ReturnType<typeof addMessageAC>
+export type UpdateTextMessageActionType = ReturnType<typeof changeMessageTextAC>
 
-export type ActionsType =  AddPostActionType | UpdateTextActionType
-export type SoreType = {
+export type ActionsType =  AddPostActionType | UpdateTextActionType | AddMessageActionType | UpdateTextMessageActionType
+export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: () => void
@@ -57,8 +63,19 @@ export const changeNewPostTextAC  = (newPostText: string) => {
         newPostText: newPostText
     } as const
 }
+export const changeMessageTextAC  = (newMessageText: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newMessageText: newMessageText
+    } as const
+}
 
-let store: SoreType = {
+export const addMessageAC  = () => {
+    return {type: "ADD-MESSAGE"} as const
+}
+
+
+let store: StoreType = {
     _state: {
         profilePage: {
             postsData: [
@@ -79,7 +96,8 @@ let store: SoreType = {
                 {id: 6, message: "How are you?"},
                 {id: 7, message: "Yo"},
                 {id: 8, message: "Yo"}
-            ]
+            ],
+            newMessageText: ''
         }
     },
     getState() {
@@ -100,6 +118,17 @@ let store: SoreType = {
             this._callSubscriber()
         } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
             this._state.profilePage.newPostText = action.newPostText;
+            this._callSubscriber()
+        }else if ( action.type === 'ADD-MESSAGE'){
+            let newMessage: MessageType = {
+                id: 9,
+                message: this._state.messagesPage.newMessageText
+            }
+            this._state.messagesPage.messagesData.push(newMessage)
+            this._state.messagesPage.newMessageText = ''
+            this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT'){
+            this._state.messagesPage.newMessageText = action.newMessageText;
             this._callSubscriber()
         }
     },
