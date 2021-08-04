@@ -5,6 +5,9 @@ let rerenderEntireTree = () => {
 */
 
 
+import {AddPostActionType, profileReducer, UpdateTextActionType} from "./profile-reducer";
+import {AddMessageActionType, messageReducer, UpdateTextMessageActionType} from "./message-reducer";
+
 export type MessageType = {
     id: number
     message: string
@@ -39,10 +42,6 @@ export type StateType = {
 export type AllStateType ={
     state: StateType
 }
-export type AddPostActionType = ReturnType<typeof addPostAC>
-export type UpdateTextActionType = ReturnType<typeof changeNewPostTextAC>
-export type AddMessageActionType = ReturnType<typeof addMessageAC>
-export type UpdateTextMessageActionType = ReturnType<typeof changeMessageTextAC>
 
 export type ActionsType =  AddPostActionType | UpdateTextActionType | AddMessageActionType | UpdateTextMessageActionType
 export type StoreType = {
@@ -52,28 +51,6 @@ export type StoreType = {
     subscriber: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
-
-export const addPostAC  = () => {
-    return {type: "ADD-POST"} as const
-}
-
-export const changeNewPostTextAC  = (newPostText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newPostText: newPostText
-    } as const
-}
-export const changeMessageTextAC  = (newMessageText: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessageText: newMessageText
-    } as const
-}
-
-export const addMessageAC  = () => {
-    return {type: "ADD-MESSAGE"} as const
-}
-
 
 let store: StoreType = {
     _state: {
@@ -107,30 +84,9 @@ let store: StoreType = {
         console.log('change')
     },
     dispatch(action){
-        if ( action.type === 'ADD-POST'){
-            let newPost: PostsDataType = {
-                id: 3,
-                message: this._state.profilePage.newPostText,
-                likesCount: '0'
-            }
-            this._state.profilePage.postsData.push(newPost)
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
-            this._state.profilePage.newPostText = action.newPostText;
-            this._callSubscriber()
-        }else if ( action.type === 'ADD-MESSAGE'){
-            let newMessage: MessageType = {
-                id: 9,
-                message: this._state.messagesPage.newMessageText
-            }
-            this._state.messagesPage.messagesData.push(newMessage)
-            this._state.messagesPage.newMessageText = ''
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT'){
-            this._state.messagesPage.newMessageText = action.newMessageText;
-            this._callSubscriber()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagesPage = messageReducer(this._state.messagesPage, action)
+        this._callSubscriber()
     },
     subscriber (observer){
         this._callSubscriber = observer
