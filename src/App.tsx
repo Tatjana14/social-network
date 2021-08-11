@@ -6,10 +6,11 @@ import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from 'react-router-dom';
 import Dialogs from './components/Dialogs/Dialogs';
 import {ActionsType, StateType} from "./redux/store";
-
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 type PropsType = {
     state: StateType
     dispatch: (action: ActionsType) => void
+    store: any
 }
 
 const App = (props: PropsType) => {
@@ -21,16 +22,11 @@ const App = (props: PropsType) => {
               <Navbar />
               <Route exact path='/'
                      render={() => <Profile
-                         dispatch={props.dispatch}
-                         newPostText={props.state.profilePage.newPostText}
-                         postsData={props.state.profilePage.postsData}
+                         store={props.store}
                      />} />
               <Route path='/dialogs'
-                     render={() => <Dialogs
-                     dialogsData={props.state.messagesPage.dialogsData}
-                     messagesData={props.state.messagesPage.messagesData}
-                     newMessageText={props.state.messagesPage.newMessageText}
-                     dispatch={props.dispatch}
+                     render={() => <DialogsContainer
+                         store={props.store}
                      />}/>
           </div>
       </BrowserRouter>

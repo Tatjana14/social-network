@@ -1,8 +1,7 @@
 import s from "./MyPosts.module.scss";
 import React, {ChangeEvent} from "react";
 import Post from "./Post/Post";
-import {ActionsType, PostsDataType} from "../../../redux/store";
-import {addPostAC, changeNewPostTextAC} from "../../../redux/profile-reducer";
+import {PostsDataType} from "../../../redux/store";
 
 
 
@@ -10,7 +9,8 @@ import {addPostAC, changeNewPostTextAC} from "../../../redux/profile-reducer";
 type MyPostsType = {
     postsData: Array<PostsDataType>
     newPostText: string
-    dispatch: (action: ActionsType) => void
+    addPost: () => void
+    updateNewPostsText: (text: string) => void
 }
 const MyPosts: React.FC<MyPostsType> = (props) => {
     let postsElements = props.postsData.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
@@ -19,12 +19,12 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
 
     let addPost = () => {
         if (newPostElement.current) {
-            props.dispatch(addPostAC())
+            props.addPost()
         }
     }
     let updatePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.dispatch(changeNewPostTextAC(text))
+        props.updateNewPostsText(text)
     }
     return (
         <div>

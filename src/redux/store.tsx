@@ -1,8 +1,4 @@
-/*
-let rerenderEntireTree = () => {
-    console.log('change')
-}
-*/
+
 
 
 import {AddPostActionType, profileReducer, UpdateTextActionType} from "./profile-reducer";
@@ -52,6 +48,7 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
+/*
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -92,4 +89,4 @@ let store: StoreType = {
         this._callSubscriber = observer
     }
 }
-export default store;
+export default store;*/
