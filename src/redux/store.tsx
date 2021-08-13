@@ -8,7 +8,7 @@ export type MessageType = {
     id: number
     message: string
 }
-export type PostsDataType ={
+ type PostsDataType ={
     id: number
     message: string
     likesCount: string

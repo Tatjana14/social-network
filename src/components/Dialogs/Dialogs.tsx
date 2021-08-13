@@ -3,19 +3,9 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.scss'
 import MessItem from './MessageItem/MessItem';
 import DialogItem from "./DialogItem/DialogItem";
-import { DialogsDataType, MessagesDataType} from "../../redux/store";
+import {DialogsPropsType} from "./DialogsContainer";
 
-
-
-
-type DialogsType = {
-    dialogsData: Array<DialogsDataType>
-    messagesData: Array<MessagesDataType>
-    newMessageText: string
-    addMessage: () => void
-    updateMessageText: (message: string) => void
-}
-const Dialogs: React.FC<DialogsType> = (props) =>{
+const Dialogs: React.FC<DialogsPropsType> = (props) =>{
 
     let dialogsElements = props.dialogsData.map( d => <DialogItem name={d.name} id={d.id}/>);
     let messagesElements = props.messagesData.map( m => <MessItem key={m.id} textMessage={m.message} />)

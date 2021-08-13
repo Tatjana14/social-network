@@ -1,23 +1,31 @@
-import { MessageType} from "./store";
 
+type MessageType = {
+    id: number
+    message: string
+}
+type DialogsDataType = {
+    id: number
+    name: string
+}
 let initialState ={
     dialogsData: [
         {id: 1, name: "Ilja"},
         {id: 2, name: "Inna"},
         {id: 3, name: "Polina"},
         {id: 4, name: "Lena"}
-    ],
+    ] as Array<DialogsDataType>,
     messagesData: [
         {id: 5, message: "Hi"},
         {id: 6, message: "How are you?"},
         {id: 7, message: "Yo"},
         {id: 8, message: "Yo"}
-    ],
+    ] as Array<MessageType>,
     newMessageText: ''
 }
 
+export type InitialStateType = typeof initialState
 
-export const messageReducer = (state = initialState, action: AllActionsType) => {
+export const messageReducer = (state: InitialStateType = initialState, action: AllActionsType): InitialStateType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage: MessageType = {
