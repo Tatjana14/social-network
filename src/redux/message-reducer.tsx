@@ -32,12 +32,16 @@ export const messageReducer = (state: InitialStateType = initialState, action: A
                 id: 9,
                 message: state.newMessageText
             }
-            state.messagesData.push(newMessage)
-            state.newMessageText = ''
-            return state
+            return  {
+                ...state,
+                messagesData: [...state.messagesData, newMessage],
+                newMessageText: ''
+            }
         case 'UPDATE-NEW-MESSAGE-TEXT':
-            state.newMessageText = action.newMessageText;
-            return state
+            return {
+                ...state,
+                newMessageText: action.newMessageText
+            }
         default:
             return state
     }
