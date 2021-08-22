@@ -11,6 +11,9 @@ export type UserType = {
     location: LocationType
 }
 let initialState = {
+    users: [] as Array<any>
+}
+/*let initialState = {
     users: [
         {
             id: 111,
@@ -45,11 +48,11 @@ let initialState = {
             location: {city: 'Grodno', country: 'Belarus'}
         },
     ] as Array<UserType>,
-}
+}*/
 
 export type InitialStateType = typeof initialState
 
-export const usersReducer = (state: InitialStateType = initialState, action: AllActionsType): InitialStateType => {
+export const usersReducer = (state: InitialStateType = initialState, action: AllActionsType):InitialStateType  => {
     switch (action.type) {
         case "FOLLOW":
             return  {...state, users: state.users.map( u => u.id === action.userID? {...u, followed: true} : u)}
