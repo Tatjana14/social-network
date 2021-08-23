@@ -2,16 +2,20 @@ export type LocationType = {
     city: string
     country: string
 }
+type PhotosType = {
+    small: null | string
+    large: null
+}
 export type UserType = {
-    id: number
-    userPhoto: string
     followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
+    id: number
+    name: string
+    photos: PhotosType
+    status: null | string
+    uniqueUrlName: null | string
 }
 let initialState = {
-    users: [] as Array<any>
+    users: [] as Array<UserType>
 }
 /*let initialState = {
     users: [

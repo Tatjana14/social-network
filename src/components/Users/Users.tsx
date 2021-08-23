@@ -3,10 +3,17 @@ import {UsersPropsType} from "./UsersContainer";
 import s from './Users.module.scss'
 import axios from "axios";
 import user from '../../assets/img/user.png'
+import {UserType} from "../../redux/users-reducer";
 
+type GetUsersResponseType = {
+    error: null | string
+    items: Array<UserType>
+    totalCount: number
+}
 class Users extends React.Component<UsersPropsType, any> {
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        axios.get<GetUsersResponseType>("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            debugger
             this.props.setUsers(response.data.items)
         })
     }
