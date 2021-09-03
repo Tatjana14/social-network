@@ -4,8 +4,9 @@ export type LocationType = {
 }
 type PhotosType = {
     small: null | string
-    large: null
+    large: null | string
 }
+
 export type UserType = {
     followed: boolean
     id: number
@@ -15,44 +16,11 @@ export type UserType = {
     uniqueUrlName: null | string
 }
 let initialState = {
-    users: [] as Array<UserType>
+    users: [] as Array<UserType>,
+    pageSize: 5,
+    totalUsersCount: 100,
+    currentPage: 1
 }
-/*let initialState = {
-    users: [
-        {
-            id: 111,
-            userPhoto: 'https://www.meme-arsenal.com/memes/90ea353f15778fa082b8ba92690225f4.jpg',
-            followed: false,
-            fullName: "Tati",
-            status: 'I am constantly learning',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 222,
-            userPhoto: 'https://www.meme-arsenal.com/memes/90ea353f15778fa082b8ba92690225f4.jpg',
-            followed: true,
-            fullName: "Ilja",
-            status: 'I am a fitness instructor',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 333,
-            userPhoto: 'https://www.meme-arsenal.com/memes/90ea353f15778fa082b8ba92690225f4.jpg',
-            followed: false,
-            fullName: "Inna",
-            status: 'I sell laboratory instruments',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 444,
-            userPhoto: 'https://www.meme-arsenal.com/memes/90ea353f15778fa082b8ba92690225f4.jpg',
-            followed: false,
-            fullName: "Polina",
-            status: 'I treat children teeth',
-            location: {city: 'Grodno', country: 'Belarus'}
-        },
-    ] as Array<UserType>,
-}*/
 
 export type InitialStateType = typeof initialState
 
@@ -63,13 +31,17 @@ export const usersReducer = (state: InitialStateType = initialState, action: All
         case "UNFOLLOW":
             return( {...state, users: state.users.map( u => u.id === action.userID? {...u, followed: false} : u)})
         case "SET_USERS":
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        case "SET_CURRENT_PAGE":
+            return {...state, currentPage: action.currentPage}
+        case "SET_TOTAL_USERS_COUNT":
+            return {...state, totalUsersCount: action.totalCount}
         default:
             return state
     }
 }
 
-type AllActionsType = FollowACType | UnfollowACType | SetUsersType
+type AllActionsType = FollowACType | UnfollowACType | SetUsersType | SetCurrentPageType | SetTotalUsersCountType
 
 export const followAC = (userID: number) => {
     return {type: "FOLLOW", userID} as const
@@ -80,6 +52,14 @@ export const unfollowAC = (userID: number) => {
 export const setUsersAC = (users: any) => {
     return {type: "SET_USERS", users} as const
 }
+export const setCurrentPageAC = (currentPage: number) => {
+    return {type: "SET_CURRENT_PAGE", currentPage} as const
+}
+export const setTotalUsersCountAC = (totalCount: number) => {
+    return {type: "SET_TOTAL_USERS_COUNT", totalCount} as const
+}
 export type FollowACType = ReturnType<typeof followAC>
 export type UnfollowACType = ReturnType<typeof unfollowAC>
 export type SetUsersType = ReturnType<typeof setUsersAC>
+export type SetCurrentPageType = ReturnType<typeof setCurrentPageAC>
+export type SetTotalUsersCountType = ReturnType<typeof setTotalUsersCountAC>
