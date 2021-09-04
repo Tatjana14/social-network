@@ -2,8 +2,9 @@ import s from "./Users.module.scss";
 import user from "../../assets/img/user.png";
 import React from "react";
 import {UserType} from "../../redux/users-reducer";
+import { NavLink } from "react-router-dom";
 
- type UsersPropsType = {
+export type UsersPresentationPropsType = {
      onPageChanged: (num: number) => void
      totalUsersCount: number
      currentPage: number
@@ -13,7 +14,7 @@ import {UserType} from "../../redux/users-reducer";
      unfollow: (userID: number) => void
  }
 
-let Users = (props: UsersPropsType) =>{
+let Users = (props: UsersPresentationPropsType) =>{
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for( let i = 1; i <= pagesCount; i++){
@@ -31,7 +32,9 @@ let Users = (props: UsersPropsType) =>{
         </div>
         {props.users.map(u => <div key={u.id}>
             <div>
-                <img src={u.photos.small === null ? user : u.photos.small} alt="User photo"/>
+                <NavLink to={'/profile/' + u.id}>
+                    <img src={u.photos.small === null ? user : u.photos.small} alt="User photo"/>
+                </NavLink>
                 {u.followed ? <button onClick={() => props.unfollow(u.id)}>Unfollow</button> :
                     <button onClick={() => props.follow(u.id)}>Follow</button>}
             </div>

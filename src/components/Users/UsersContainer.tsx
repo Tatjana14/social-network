@@ -11,7 +11,7 @@ import {
 } from "../../redux/users-reducer";
 
 import axios from "axios";
-import Users from "./Users";
+import Users, {UsersPresentationPropsType} from "./Users";
 import Preloader from "../Preloader/Preloader";
 
 
@@ -21,7 +21,7 @@ type GetUsersResponseType = {
     totalCount: number
 }
 
-class UsersContainer extends React.Component<UsersPropsType, any> {
+class UsersContainer extends React.Component<UsersPropsType, UsersPresentationPropsType> {
     componentDidMount() {
         this.props.toggleFetching(true)
         axios.get<GetUsersResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {

@@ -7,7 +7,7 @@ const Navbar = () => {
         <nav className={s.navigation}>
             <ul className={s.menu}>
                 <li className={s.menu_item}>
-                    <NavLink to="/" className={s.menu_link}>Profile</NavLink>
+                    <NavLink to="/profile" className={s.menu_link}>Profile</NavLink>
                 </li>
                 <li className={s.menu_item}>
                     <NavLink to="/dialogs" className={s.menu_link}>Messages</NavLink>
