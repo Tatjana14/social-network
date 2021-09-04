@@ -18,4 +18,12 @@ ul{
     display: grid;
     grid-template-columns: 300px 1fr;
     grid-auto-rows: auto;
+    background-color: #17202A;
+}
+
+.svg{
+    margin: auto;
+    background-color: transparent;
+    display: block;
+    shape-rendering: auto
 }
