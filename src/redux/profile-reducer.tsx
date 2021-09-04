@@ -13,12 +13,12 @@ type PhotosType = {
     "large": string | undefined
 }
 export type UserProfileType = {
-    "aboutMe": null | string,
-    "contacts": ContactsType,
-    "lookingForAJob": boolean,
-    "lookingForAJobDescription": null | string,
-    "fullName": null | string,
-    "userId": number,
+    "aboutMe": null | string
+    "contacts": ContactsType
+    "lookingForAJob": boolean
+    "lookingForAJobDescription": null | string
+    "fullName": null | string
+    "userId": number
     "photos": PhotosType
 }
 
