@@ -7,6 +7,9 @@ const Header = () => {
             <div className={s.container}>
                 <a href="#" className={s.logo}>LOGO</a>
             </div>
+            <div className={s.headerLogin}>
+
+            </div>
         </header>
     );
 }
