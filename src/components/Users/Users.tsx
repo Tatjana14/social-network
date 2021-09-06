@@ -3,6 +3,7 @@ import user from "../../assets/img/user.png";
 import React from "react";
 import {UserType} from "../../redux/users-reducer";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 export type UsersPresentationPropsType = {
      onPageChanged: (num: number) => void
@@ -35,8 +36,30 @@ let Users = (props: UsersPresentationPropsType) =>{
                 <NavLink to={'/profile/' + u.id}>
                     <img src={u.photos.small === null ? user : u.photos.small} alt="User photo"/>
                 </NavLink>
-                {u.followed ? <button onClick={() => props.unfollow(u.id)}>Unfollow</button> :
-                    <button onClick={() => props.follow(u.id)}>Follow</button>}
+                {u.followed ? <button onClick={() =>{
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
+                            {withCredentials: true,
+                                headers: {
+                                "API-KEY": "e45bf822-869b-4e78-8fc6-0900ff5c0847"
+                                }
+                            }).
+                        then(response => {
+                            if(response.data.resultCode === 0){
+                                props.unfollow(u.id)
+                            }
+                        })
+                        }}>Unfollow</button> :
+                    <button onClick={() => {
+                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {}, {withCredentials: true,  headers: {
+                                "API-KEY": "e45bf822-869b-4e78-8fc6-0900ff5c0847"
+                            }}).
+                        then(response => {
+                            debugger
+                            if(response.data.resultCode === 0){
+                                props.follow(u.id)
+                            }
+                        })
+                    } }>Follow</button>}
             </div>
             <div>
                 <div>
