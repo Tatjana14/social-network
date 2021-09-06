@@ -8,6 +8,7 @@ type InitialStateType = {
     id: number | null
     email: string | undefined
     login: string | undefined
+    isAuth: boolean
 }
 
 
@@ -15,6 +16,7 @@ let initialState = {
     id: null,
     email: undefined,
     login: undefined,
+    isAuth: false
 }
 
 
@@ -24,7 +26,8 @@ export const authReducer = (state: InitialStateType = initialState, action: AllA
         case "SET_USER_DATA":
             return {
                 ...state,
-                ...action.userData
+                ...action.userData,
+                isAuth: true,
             }
         default:
             return state
