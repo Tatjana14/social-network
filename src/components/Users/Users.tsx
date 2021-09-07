@@ -3,7 +3,6 @@ import user from "../../assets/img/user.png";
 import React from "react";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
 import {usersAPI} from "../../api/api";
 
 export type UsersPresentationPropsType = {
@@ -14,6 +13,8 @@ export type UsersPresentationPropsType = {
     users: Array<UserType>
     follow: (userID: number) => void
     unfollow: (userID: number) => void
+    toggleFollowingProgress: (isFetching: boolean, id: number) => void
+    followingInProgress: Array<number>
 }
 
 let Users = (props: UsersPresentationPropsType) => {
@@ -37,18 +38,23 @@ let Users = (props: UsersPresentationPropsType) => {
                 <NavLink to={'/profile/' + u.id}>
                     <img src={u.photos.small === null ? user : u.photos.small} alt="User photo"/>
                 </NavLink>
-                {u.followed ? <button onClick={() => {
+                {u.followed ? <button disabled={props.followingInProgress.some( id => id === u.id)} onClick={() => {
+                    props.toggleFollowingProgress(true, u.id)
                         usersAPI.makeUnfollow(u.id).then(data => {
                             if (data.resultCode === 0) {
                                 props.unfollow(u.id)
                             }
+                            props.toggleFollowingProgress(false, u.id)
+
                         })
                     }}>Unfollow</button> :
-                    <button onClick={() => {
+                    <button disabled={props.followingInProgress.some( id => id === u.id)} onClick={() => {
+                        props.toggleFollowingProgress(true, u.id)
                         usersAPI.makeFollow(u.id).then(data => {
                             if (data.resultCode === 0) {
                                 props.follow(u.id)
                             }
+                            props.toggleFollowingProgress(false, u.id)
                         })
                     }}>Follow</button>}
             </div>

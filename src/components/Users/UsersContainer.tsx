@@ -5,7 +5,7 @@ import {
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleFetching,
+    setUsers, toggleFetching, toggleFollowingProgress,
     unfollow,
     UserType
 } from "../../redux/users-reducer";
@@ -36,7 +36,10 @@ class UsersContainer extends React.Component<UsersPropsType, UsersPresentationPr
             {this.props.isFetching ? <Preloader/> : null}
             <Users onPageChanged={this.onPageChanged} totalUsersCount={this.props.totalUsersCount}
                    currentPage={this.props.currentPage} pageSize={this.props.pageSize} users={this.props.users}
-                   follow={this.props.follow} unfollow={this.props.unfollow}/>
+                   follow={this.props.follow} unfollow={this.props.unfollow}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
+                   followingInProgress={this.props.followingInProgress}
+            />
         </>
     }
 }
@@ -49,6 +52,7 @@ type MapStateToPropsType =
         totalUsersCount: number
         currentPage: number
         isFetching: boolean
+        followingInProgress: Array<number>
     }
 type MapDispatchToPropsType =
     {
@@ -58,6 +62,7 @@ type MapDispatchToPropsType =
         setCurrentPage: (currentPage: number) => void
         setTotalUsersCount: (totalCount: number) => void
         toggleFetching: (isFetching: boolean) => void
+        toggleFollowingProgress: (isFetching: boolean, id: number) => void
     }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -66,7 +71,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 export default connect(mapStateToProps, {
@@ -75,5 +81,6 @@ export default connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    toggleFetching
+    toggleFetching,
+    toggleFollowingProgress
 })(UsersContainer)
