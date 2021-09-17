@@ -11,9 +11,8 @@ export type UsersPresentationPropsType = {
     currentPage: number
     pageSize: number
     users: Array<UserType>
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    toggleFollowingProgress: (isFetching: boolean, id: number) => void
+    follow: (userID: number) => any
+    unfollow: (userID: number) => any
     followingInProgress: Array<number>
 }
 
@@ -39,23 +38,10 @@ let Users = (props: UsersPresentationPropsType) => {
                     <img src={u.photos.small === null ? user : u.photos.small} alt="User photo"/>
                 </NavLink>
                 {u.followed ? <button disabled={props.followingInProgress.some( id => id === u.id)} onClick={() => {
-                    props.toggleFollowingProgress(true, u.id)
-                        usersAPI.makeUnfollow(u.id).then(data => {
-                            if (data.resultCode === 0) {
-                                props.unfollow(u.id)
-                            }
-                            props.toggleFollowingProgress(false, u.id)
-
-                        })
+                    props.unfollow(u.id)
                     }}>Unfollow</button> :
                     <button disabled={props.followingInProgress.some( id => id === u.id)} onClick={() => {
-                        props.toggleFollowingProgress(true, u.id)
-                        usersAPI.makeFollow(u.id).then(data => {
-                            if (data.resultCode === 0) {
-                                props.follow(u.id)
-                            }
-                            props.toggleFollowingProgress(false, u.id)
-                        })
+                        props.follow(u.id)
                     }}>Follow</button>}
             </div>
             <div>
