@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 type ContactsType = {
     "facebook": null | string,
     "website": null | string,
@@ -92,3 +95,11 @@ export const setUserProfile  = (profile: UserProfileType) => {
 export type AddPostActionType = ReturnType<typeof addPost>
 export type UpdateTextActionType = ReturnType<typeof changeNewPostText>
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
+
+export const getUserProfile = (userId: string) =>{
+    return (dispatch: Dispatch<AllActionsType>) => {
+        usersAPI.getProfile(userId).then(response => {
+            dispatch(setUserProfile(response))
+        })
+    }
+}
