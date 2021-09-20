@@ -5,6 +5,10 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {DialogsDataType, MessageType} from "../../redux/store";
+import {Redirect} from "react-router-dom";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+
+
 
 type MapStateToPropsType = {
     dialogsData: Array<DialogsDataType>
@@ -31,5 +35,8 @@ const  mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType =>{
         updateMessageText: (message: string) => dispatch(changeMessageTextAC(message))
     }
 }
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+
+let AuthRedirectComponent = WithAuthRedirect(Dialogs)
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 export default DialogsContainer;
